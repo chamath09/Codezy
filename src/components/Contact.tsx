@@ -39,8 +39,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-white font-display font-bold mb-1">Call Us</h4>
-                  <p className="text-zinc-400 text-sm">+1 (555) 123-4567</p>
-                  <p className="text-zinc-400 text-sm">Mon-Fri, 9am-6pm EST</p>
+                  <p className="text-zinc-400 text-sm">071 482 2623</p>
+                  <p className="text-zinc-400 text-sm">Mon-Fri, 9am-6pm</p>
                 </div>
               </div>
               
@@ -50,8 +50,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <h4 className="text-white font-display font-bold mb-1">Visit Us</h4>
-                  <p className="text-zinc-400 text-sm">123 Innovation Drive</p>
-                  <p className="text-zinc-400 text-sm">Tech District, NY 10001</p>
+                  <p className="text-zinc-400 text-sm">No.1459, padalangala</p>
+                  <p className="text-zinc-400 text-sm">Sri Lanka</p>
                 </div>
               </div>
             </div>
@@ -130,13 +130,15 @@ export default function Contact() {
               </button>
               
               <div className="pt-4 flex justify-center">
-                <button
-                  type="button"
+                <a
+                  href="https://wa.me/94714822623"
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 px-6 py-3 rounded-full bg-[#25D366]/10 text-[#25D366] font-medium hover:bg-[#25D366]/20 transition-colors border border-[#25D366]/20"
                 >
                   <MessageSquare className="w-5 h-5" />
                   Chat on WhatsApp
-                </button>
+                </a>
               </div>
             </form>
           </motion.div>
