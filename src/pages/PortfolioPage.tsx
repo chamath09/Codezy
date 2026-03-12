@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { ExternalLink, Monitor, Smartphone, LayoutDashboard, Code, Globe, Database } from 'lucide-react';
+import { ExternalLink, Monitor, Smartphone, LayoutDashboard, Code, Globe, Database, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const allProjects = [
   {
@@ -65,10 +65,23 @@ const categories = ['All', ...Array.from(new Set(allProjects.map(p => p.category
 
 export default function PortfolioPage() {
   const [activeCategory, setActiveCategory] = useState('All');
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 6;
 
   const filteredProjects = activeCategory === 'All' 
     ? allProjects 
     : allProjects.filter(p => p.category === activeCategory);
+
+  const totalPages = Math.ceil(filteredProjects.length / ITEMS_PER_PAGE);
+  const paginatedProjects = filteredProjects.slice(
+    (currentPage - 1) * ITEMS_PER_PAGE,
+    currentPage * ITEMS_PER_PAGE
+  );
+
+  const handleCategoryChange = (category: string) => {
+    setActiveCategory(category);
+    setCurrentPage(1);
+  };
 
   return (
     <main className="pt-32 pb-24 min-h-screen">
@@ -92,20 +105,25 @@ export default function PortfolioPage() {
         </div>
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-3 mb-16">
-          {categories.map((category) => (
-            <button
-              key={category}
-              onClick={() => setActiveCategory(category)}
-              className={`px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
-                activeCategory === category
-                  ? 'bg-brand-500 text-zinc-950 shadow-[0_0_15px_rgba(245,158,11,0.3)]'
-                  : 'bg-zinc-900/80 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800/50'
-              }`}
-            >
-              {category}
-            </button>
-          ))}
+        <div className="relative mb-16 max-w-full overflow-hidden">
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-zinc-950 to-transparent z-10 pointer-events-none md:hidden"></div>
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-zinc-950 to-transparent z-10 pointer-events-none md:hidden"></div>
+          
+          <div className="flex overflow-x-auto snap-x snap-mandatory justify-start md:justify-center gap-3 pb-4 px-4 md:px-0 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+            {categories.map((category) => (
+              <button
+                key={category}
+                onClick={() => handleCategoryChange(category)}
+                className={`snap-center whitespace-nowrap px-6 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
+                  activeCategory === category
+                    ? 'bg-brand-500 text-zinc-950 shadow-[0_0_15px_rgba(245,158,11,0.3)]'
+                    : 'bg-zinc-900/80 text-zinc-400 hover:text-white hover:bg-zinc-800 border border-zinc-800/50'
+                }`}
+              >
+                {category}
+              </button>
+            ))}
+          </div>
         </div>
 
         <motion.div 
@@ -113,7 +131,7 @@ export default function PortfolioPage() {
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
         >
           <AnimatePresence mode="popLayout">
-            {filteredProjects.map((project, index) => (
+            {paginatedProjects.map((project, index) => (
               <motion.div
                 layout
                 key={project.title}
@@ -158,6 +176,43 @@ export default function PortfolioPage() {
             ))}
           </AnimatePresence>
         </motion.div>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="flex justify-center items-center gap-2 mt-16">
+            <button
+              onClick={() => setCurrentPage(p => Math.max(1, p - 1))}
+              disabled={currentPage === 1}
+              className="p-2 rounded-full border border-zinc-800 bg-zinc-900 text-zinc-400 hover:text-white hover:border-brand-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </button>
+            
+            <div className="flex gap-2">
+              {Array.from({ length: totalPages }).map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setCurrentPage(i + 1)}
+                  className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-medium transition-all ${
+                    currentPage === i + 1
+                      ? 'bg-brand-500 text-zinc-950'
+                      : 'border border-zinc-800 bg-zinc-900 text-zinc-400 hover:text-white hover:border-brand-500/50'
+                  }`}
+                >
+                  {i + 1}
+                </button>
+              ))}
+            </div>
+
+            <button
+              onClick={() => setCurrentPage(p => Math.min(totalPages, p + 1))}
+              disabled={currentPage === totalPages}
+              className="p-2 rounded-full border border-zinc-800 bg-zinc-900 text-zinc-400 hover:text-white hover:border-brand-500/50 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            >
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </div>
+        )}
       </div>
     </main>
   );
