@@ -50,6 +50,10 @@ html {
 }
 
 /* Swiper Customization */
+.testimonials-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
 .testimonials-swiper .swiper-pagination-bullet {
   background-color: theme('colors.zinc.600');
   opacity: 0.5;

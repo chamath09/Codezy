@@ -89,7 +89,7 @@ export default function Testimonials() {
             className="pb-16 testimonials-swiper"
           >
             {testimonials.map((testimonial, index) => (
-              <SwiperSlide key={testimonial.name} className="h-auto">
+              <SwiperSlide key={testimonial.name} className="!h-auto">
                 <div
                   className="bg-zinc-950 rounded-2xl p-8 border border-zinc-800 relative group hover:border-brand-500/30 transition-all duration-300 h-full flex flex-col"
                 >
