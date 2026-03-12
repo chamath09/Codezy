@@ -8,6 +8,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import BlogPage from './pages/BlogPage';
+import PortfolioPage from './pages/PortfolioPage';
 import ScrollManager from './components/ScrollManager';
 
 export default function App() {
@@ -19,6 +20,7 @@ export default function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/blog" element={<BlogPage />} />
+          <Route path="/portfolio" element={<PortfolioPage />} />
         </Routes>
         <Footer />
       </div>

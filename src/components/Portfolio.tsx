@@ -1,5 +1,6 @@
 import { motion } from 'motion/react';
 import { ExternalLink, Monitor, Smartphone, LayoutDashboard } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const projects = [
   {
@@ -52,16 +53,13 @@ export default function Portfolio() {
               Explore our recent work and see how we've helped businesses transform their digital presence.
             </motion.p>
           </div>
-          <motion.a
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            href="#"
+          <Link
+            to="/portfolio"
             className="inline-flex items-center gap-2 text-brand-400 font-semibold hover:text-brand-300 transition-colors group"
           >
             View All Projects
             <ExternalLink className="w-4 h-4 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-          </motion.a>
+          </Link>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

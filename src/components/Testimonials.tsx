@@ -27,6 +27,20 @@ const testimonials = [
     quote: 'Working with Codezy was a seamless experience. Their UI/UX team is world-class, delivering a product that our users absolutely love.',
     rating: 5,
   },
+  {
+    name: 'David Thompson',
+    role: 'CTO, InnovateTech',
+    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&q=80&w=200&h=200',
+    quote: 'The mobile app they developed for us exceeded all expectations. It is fast, intuitive, and has significantly boosted our user engagement.',
+    rating: 5,
+  },
+  {
+    name: 'Emily Chen',
+    role: 'Operations Manager, LogisticsPro',
+    image: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&q=80&w=200&h=200',
+    quote: 'Their custom software solution streamlined our entire supply chain. The ROI we have seen in just six months is absolutely incredible.',
+    rating: 5,
+  },
 ];
 
 export default function Testimonials() {
@@ -55,55 +69,59 @@ export default function Testimonials() {
           </motion.p>
         </div>
 
-        <Swiper
-          modules={[Pagination, Autoplay]}
-          spaceBetween={32}
-          slidesPerView={1}
-          breakpoints={{
-            768: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-          }}
-          pagination={{ clickable: true }}
-          autoplay={{ delay: 5000, disableOnInteraction: false }}
-          className="pb-16 testimonials-swiper"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ delay: 0.2 }}
         >
-          {testimonials.map((testimonial, index) => (
-            <SwiperSlide key={testimonial.name} className="h-auto">
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="bg-zinc-950 rounded-2xl p-8 border border-zinc-800 relative group hover:border-brand-500/30 transition-all duration-300 h-full flex flex-col"
-              >
-                <Quote className="absolute top-6 right-6 w-10 h-10 text-zinc-800 group-hover:text-brand-500/10 transition-colors" />
-                
-                <div className="flex gap-1 mb-6">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <Star key={i} className="w-4 h-4 fill-brand-400 text-brand-400" />
-                  ))}
-                </div>
-                
-                <p className="text-zinc-300 mb-8 leading-relaxed relative z-10 flex-grow">
-                  "{testimonial.quote}"
-                </p>
-                
-                <div className="flex items-center gap-4 mt-auto">
-                  <img
-                    src={testimonial.image}
-                    alt={testimonial.name}
-                    className="w-12 h-12 rounded-full object-cover border-2 border-zinc-800 group-hover:border-brand-500/50 transition-colors"
-                    referrerPolicy="no-referrer"
-                  />
-                  <div>
-                    <h4 className="text-white font-display font-bold text-sm">{testimonial.name}</h4>
-                    <p className="text-zinc-500 text-xs">{testimonial.role}</p>
+          <Swiper
+            modules={[Pagination, Autoplay]}
+            spaceBetween={32}
+            slidesPerView={1}
+            loop={true}
+            breakpoints={{
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 4000, disableOnInteraction: false }}
+            className="pb-16 testimonials-swiper"
+          >
+            {testimonials.map((testimonial, index) => (
+              <SwiperSlide key={testimonial.name} className="h-auto">
+                <div
+                  className="bg-zinc-950 rounded-2xl p-8 border border-zinc-800 relative group hover:border-brand-500/30 transition-all duration-300 h-full flex flex-col"
+                >
+                  <Quote className="absolute top-6 right-6 w-10 h-10 text-zinc-800 group-hover:text-brand-500/10 transition-colors" />
+                  
+                  <div className="flex gap-1 mb-6">
+                    {[...Array(testimonial.rating)].map((_, i) => (
+                      <Star key={i} className="w-4 h-4 fill-brand-400 text-brand-400" />
+                    ))}
+                  </div>
+                  
+                  <p className="text-zinc-300 mb-8 leading-relaxed relative z-10 flex-grow">
+                    "{testimonial.quote}"
+                  </p>
+                  
+                  <div className="flex items-center gap-4 mt-auto">
+                    <img
+                      src={testimonial.image}
+                      alt={testimonial.name}
+                      className="w-12 h-12 rounded-full object-cover border-2 border-zinc-800 group-hover:border-brand-500/50 transition-colors"
+                      referrerPolicy="no-referrer"
+                    />
+                    <div>
+                      <h4 className="text-white font-display font-bold text-sm">{testimonial.name}</h4>
+                      <p className="text-zinc-500 text-xs">{testimonial.role}</p>
+                    </div>
                   </div>
                 </div>
-              </motion.div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </motion.div>
       </div>
     </section>
   );
