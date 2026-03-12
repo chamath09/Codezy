@@ -123,7 +123,7 @@ export default function Contact() {
               
               <button
                 type="submit"
-                className="w-full py-4 rounded-xl bg-emerald-600 text-white font-semibold flex items-center justify-center gap-2 hover:bg-emerald-500 hover:shadow-[0_0_20px_rgba(5,150,105,0.3)] hover:scale-[1.02] transition-all duration-300"
+                className="w-full py-4 rounded-xl bg-gradient-brand text-zinc-950 font-semibold flex items-center justify-center gap-2 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:scale-[1.02] transition-all duration-300"
               >
                 Send Message
                 <Send className="w-4 h-4" />

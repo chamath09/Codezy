@@ -55,7 +55,7 @@ export default function Navbar() {
             </div>
             <Link
               to="/#contact"
-              className="px-5 py-2.5 rounded-full bg-emerald-600 text-sm font-medium text-white hover:bg-emerald-500 transition-all duration-300 shadow-[0_0_15px_rgba(5,150,105,0.3)] hover:shadow-[0_0_20px_rgba(5,150,105,0.5)]"
+              className="px-5 py-2.5 rounded-full bg-gradient-brand text-sm font-medium text-zinc-950 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] hover:scale-105 transition-all duration-300"
             >
               Contact Us
             </Link>
@@ -93,7 +93,7 @@ export default function Navbar() {
               ))}
               <Link
                 to="/#contact"
-                className="px-5 py-3 rounded-xl bg-emerald-600 text-white text-center font-semibold mt-2 hover:bg-emerald-500 transition-colors"
+                className="px-5 py-3 rounded-xl bg-gradient-brand text-zinc-950 text-center font-semibold mt-2 hover:shadow-[0_0_20px_rgba(245,158,11,0.3)] transition-all"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contact Us
