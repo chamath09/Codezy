@@ -1,5 +1,9 @@
 import { motion } from 'motion/react';
 import { Quote, Star } from 'lucide-react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Pagination, Autoplay } from 'swiper/modules';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const testimonials = [
   {
@@ -51,43 +55,55 @@ export default function Testimonials() {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <Swiper
+          modules={[Pagination, Autoplay]}
+          spaceBetween={32}
+          slidesPerView={1}
+          breakpoints={{
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+          }}
+          pagination={{ clickable: true }}
+          autoplay={{ delay: 5000, disableOnInteraction: false }}
+          className="pb-16 testimonials-swiper"
+        >
           {testimonials.map((testimonial, index) => (
-            <motion.div
-              key={testimonial.name}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="bg-zinc-950 rounded-2xl p-8 border border-zinc-800 relative group hover:border-brand-500/30 transition-all duration-300"
-            >
-              <Quote className="absolute top-6 right-6 w-10 h-10 text-zinc-800 group-hover:text-brand-500/10 transition-colors" />
-              
-              <div className="flex gap-1 mb-6">
-                {[...Array(testimonial.rating)].map((_, i) => (
-                  <Star key={i} className="w-4 h-4 fill-brand-400 text-brand-400" />
-                ))}
-              </div>
-              
-              <p className="text-zinc-300 mb-8 leading-relaxed relative z-10">
-                "{testimonial.quote}"
-              </p>
-              
-              <div className="flex items-center gap-4">
-                <img
-                  src={testimonial.image}
-                  alt={testimonial.name}
-                  className="w-12 h-12 rounded-full object-cover border-2 border-zinc-800 group-hover:border-brand-500/50 transition-colors"
-                  referrerPolicy="no-referrer"
-                />
-                <div>
-                  <h4 className="text-white font-display font-bold text-sm">{testimonial.name}</h4>
-                  <p className="text-zinc-500 text-xs">{testimonial.role}</p>
+            <SwiperSlide key={testimonial.name} className="h-auto">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1 }}
+                className="bg-zinc-950 rounded-2xl p-8 border border-zinc-800 relative group hover:border-brand-500/30 transition-all duration-300 h-full flex flex-col"
+              >
+                <Quote className="absolute top-6 right-6 w-10 h-10 text-zinc-800 group-hover:text-brand-500/10 transition-colors" />
+                
+                <div className="flex gap-1 mb-6">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-4 h-4 fill-brand-400 text-brand-400" />
+                  ))}
                 </div>
-              </div>
-            </motion.div>
+                
+                <p className="text-zinc-300 mb-8 leading-relaxed relative z-10 flex-grow">
+                  "{testimonial.quote}"
+                </p>
+                
+                <div className="flex items-center gap-4 mt-auto">
+                  <img
+                    src={testimonial.image}
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover border-2 border-zinc-800 group-hover:border-brand-500/50 transition-colors"
+                    referrerPolicy="no-referrer"
+                  />
+                  <div>
+                    <h4 className="text-white font-display font-bold text-sm">{testimonial.name}</h4>
+                    <p className="text-zinc-500 text-xs">{testimonial.role}</p>
+                  </div>
+                </div>
+              </motion.div>
+            </SwiperSlide>
           ))}
-        </div>
+        </Swiper>
       </div>
     </section>
   );

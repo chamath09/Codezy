@@ -1,5 +1,5 @@
 import { motion } from 'motion/react';
-import { Layout, MonitorSmartphone, Code, Wrench, Globe } from 'lucide-react';
+import { Layout, MonitorSmartphone, Code, Wrench, Globe, Smartphone } from 'lucide-react';
 
 const services = [
   {
@@ -31,6 +31,12 @@ const services = [
     description: 'Ongoing support, updates, and optimization to keep your digital assets running smoothly.',
     icon: Wrench,
     color: 'from-brand-500 to-orange-600',
+  },
+  {
+    title: 'Mobile App Development',
+    description: 'Native and cross-platform mobile applications designed for optimal performance and user experience.',
+    icon: Smartphone,
+    color: 'from-orange-600 to-brand-400',
   },
 ];
 

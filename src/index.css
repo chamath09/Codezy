@@ -49,6 +49,20 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Swiper Customization */
+.testimonials-swiper .swiper-pagination-bullet {
+  background-color: theme('colors.zinc.600');
+  opacity: 0.5;
+  transition: all 0.3s ease;
+}
+
+.testimonials-swiper .swiper-pagination-bullet-active {
+  background-color: theme('colors.brand.500');
+  opacity: 1;
+  width: 24px;
+  border-radius: 4px;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
